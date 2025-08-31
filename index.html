@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineer (E) - Job Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="workday-container">
+        <header class="workday-header">
+            <h1 class="job-title">Software Engineer (E)</h1>
+        </header>
+
+        <!-- Progress Steps -->
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Create Account/Sign In</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">My Information</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">My Experience</div>
+                </div>
+                <div class="step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Application Questions</div>
+                </div>
+                <div class="step" data-step="5">
+                    <div class="step-circle">5</div>
+                    <div class="step-label">Voluntary Disclosures</div>
+                </div>
+                <div class="step" data-step="6">
+                    <div class="step-circle">6</div>
+                    <div class="step-label">Self Identify</div>
+                </div>
+                <div class="step" data-step="7">
+                    <div class="step-circle">7</div>
+                    <div class="step-label">Review</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Account Section -->
+        <div id="createAccountSection" class="section active">
+            <div class="workday-form-container">
+                <h2 class="section-title">Create Account</h2>
+                <p class="section-description">
+                    Please create an account to check your application status, 
+                    manage in-progress applications and quickly apply to future jobs.
+                </p>
+                
+                <form id="signupForm" class="workday-form">
+                    <div class="password-requirements">
+                        <h4>Password Requirements:</h4>
+                        <ul>
+                            <li>A numeric character</li>
+                            <li>An alphabetic character</li>
+                            <li>A minimum of 8 characters</li>
+                            <li>A lowercase character</li>
+                            <li>A special character</li>
+                            <li>An uppercase character</li>
+                        </ul>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" name="signupEmail" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="signupPassword" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="confirmPassword">Verify New Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+
+                    <div class="agreement-section">
+                        <p>In order to proceed with your application, we need you to create an account. This lets you submit your work history and information to us and allows our recruiters to match you to career opportunities at TechCorp.</p>
+                        <div class="checkbox-field">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            <label for="agreeTerms">I agree to create an account and submit my work information.</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="workday-btn-primary">Create Account</button>
+                    
+                    <div class="signin-links">
+                        <p>Already have an account? <a href="#" id="showSignin">Sign In</a></p>
+                        <p><a href="#" class="forgot-password">Forgot your password?</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sign In Section -->
+        <div id="signinSection" class="section">
+            <div class="workday-form-container">
+                <h2 class="section-title">Sign In</h2>
+                <p class="section-description">
+                    Sign in to your existing account to continue with your application.
+                </p>
+                
+                <form id="loginForm" class="workday-form">
+                    <div class="form-field">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <button type="submit" class="workday-btn-primary">Sign In</button>
+                    
+                    <div class="signin-links">
+                        <p>Don't have an account? <a href="#" id="showSignup">Create Account</a></p>
+                        <p><a href="#" class="forgot-password">Forgot your password?</a></p>
+                    </div>
+                </form>
+            </div>
+        </div> 
+       <!-- My Information Section -->
+        <div id="informationSection" class="section">
+            <div class="workday-form-container">
+                <h2 class="section-title">My Information</h2>
+                <p class="section-description">
+                    <span class="required-indicator">* Indicates a required field</span>
+                </p>
+                
+                <form id="informationForm" class="workday-form">
+                    <div class="form-field">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="address-section">
+                        <h4>Current Address *</h4>
+                        <div class="address-row">
+                            <div class="form-field">
+                                <label for="unitNumber">Unit Number *</label>
+                                <input type="text" id="unitNumber" name="unitNumber" required placeholder="123 or 4B">
+                            </div>
+                            
+                            <div class="form-field">
+                                <label for="streetAddress">Street Name *</label>
+                                <input type="text" id="streetAddress" name="streetAddress" required placeholder="Main Street">
+                            </div>
+                        </div>
+                        
+                        <div class="address-row">
+                            <div class="form-field">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                            
+                            <div class="form-field">
+                                <label for="country">Country *</label>
+                                <input type="text" id="country" name="country" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label for="pinCode">Pin Code / Postal Code *</label>
+                            <input type="text" id="pinCode" name="pinCode" required placeholder="12345 or AB1 2CD">
+                        </div>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="linkedin">LinkedIn Profile</label>
+                        <input type="url" id="linkedin" name="linkedin">
+                    </div>
+                    
+                    <div class="form-field">
+                        <label for="github">GitHub Profile</label>
+                        <input type="url" id="github" name="github">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="workday-btn-secondary" id="backToAccount">Back</button>
+                        <button type="submit" class="workday-btn-primary">Save and Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- My Experience Section -->
+        <div id="experienceSection" class="section">
+            <div class="workday-form-container">
+                <h2 class="section-title">My Experience</h2>
+                <p class="section-description">
+                    <span class="required-indicator">* Indicates a required field</span>
+                </p>
+                
+                <form id="experienceForm" class="workday-form">
+                    <div class="experience-note">
+                        <h4>Work Experience</h4>
+                        <p>If you are a current or recent student with no professional work experience, please enter your school in the Company field and enter Student in the Title field.</p>
+                    </div>
+
+                    <!-- Resume Upload Section -->
+                    <div class="resume-upload-section">
+                        <h4>Resume Upload</h4>
+                        <div class="form-field">
+                            <label for="resumeUpload">Upload your resume (PDF, DOC, DOCX) *</label>
+                            <input type="file" id="resumeUpload" name="resumeUpload" accept=".pdf,.doc,.docx" required>
+                            <div class="file-upload-note">
+                                <small>Maximum file size: 5MB. Accepted formats: PDF, DOC, DOCX</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="experienceContainer">
+                        <div class="work-experience-section" data-experience="1">
+                            <div class="experience-header">
+                                <h4>Work Experience 1</h4>
+                            </div>
+                            
+                            <div class="form-field">
+                                <label for="jobTitle1">Job Title *</label>
+                                <input type="text" id="jobTitle1" name="jobTitle1" required>
+                            </div>
+                            
+                            <div class="form-field">
+                                <label for="company1">Company *</label>
+                                <input type="text" id="company1" name="company1" required>
+                            </div>
+                            
+                            <div class="form-field">
+                                <label for="location1">Location</label>
+                                <input type="text" id="location1" name="location1">
+                            </div>
+                            
+                            <div class="checkbox-field">
+                                <input type="checkbox" id="currentWork1" name="currentWork1">
+                                <label for="currentWork1">I currently work here</label>
+                            </div>
+                            
+                            <div class="date-range">
+                                <div class="form-field">
+                                    <label for="fromDate1">From</label>
+                                    <input type="month" id="fromDate1" name="fromDate1">
+                                </div>
+                                <div class="form-field">
+                                    <label for="toDate1">To</label>
+                                    <input type="month" id="toDate1" name="toDate1">
+                                </div>
+                            </div>
+                            
+                            <div class="form-field">
+                                <label for="roleDescription1">Role Description</label>
+                                <textarea id="roleDescription1" name="roleDescription1" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="add-experience-section">
+                        <button type="button" id="addExperienceBtn" class="workday-btn-secondary">+ Add Another Work Experience</button>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="workday-btn-secondary" id="backToInfo">Back</button>
+                        <button type="submit" class="workday-btn-primary">Save and Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>        
+<!-- Application Questions Section -->
+        <div id="questionsSection" class="section">
+            <div class="workday-form-container">
+                <h2 class="section-title">Application Questions</h2>
+                <p class="section-description">
+                    <span class="required-indicator">* Indicates a required field</span>
+                </p>
+                <p class="section-note">Please answer questions truthfully and completely.</p>
+                
+                <form id="questionsForm" class="workday-form">
+                    <div class="form-field">
+                        <label for="basicRequirements">Do you have at least the basic job requirements listed for this position on the posted job description? *</label>
+                        <select id="basicRequirements" name="basicRequirements" required>
+                            <option value="">Select One</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="workAuthorized">Are you legally authorized to work in the United States? *</label>
+                        <select id="workAuthorized" name="workAuthorized" required>
+                            <option value="">Select One</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="sponsorshipRequired">Will you now, or in the future, require sponsorship (i.e. H-1B, VISA etc.) to legally work for KLA in the US? *</label>
+                        <select id="sponsorshipRequired" name="sponsorshipRequired" required>
+                            <option value="">Select One</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="optTraining">If so, are you currently in a period of Optional Practical Training (OPT)? *</label>
+                        <select id="optTraining" name="optTraining" required>
+                            <option value="">Select One</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                            <option value="na">Not Applicable</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="yearsExperience">How many years of relevant professional experience do you have related to this position? *</label>
+                        <select id="yearsExperience" name="yearsExperience" required>
+                            <option value="">Select One</option>
+                            <option value="0-1">0-1 years</option>
+                            <option value="2-3">2-3 years</option>
+                            <option value="4-5">4-5 years</option>
+                            <option value="6-10">6-10 years</option>
+                            <option value="10+">10+ years</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="previousKLA">Are you currently or have you within the last 12 months ever worked at KLA through a third-party company or agency? *</label>
+                        <select id="previousKLA" name="previousKLA" required>
+                            <option value="">Select One</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+
+                    <!-- Behavioral Questions Section -->
+                    <div class="behavioral-questions-section">
+                        <h4>Behavioral Assessment Questions</h4>
+                        <p class="behavioral-note"><strong>Important:</strong> Please do not use AI or any generative tools to answer these questions. We can easily detect AI-generated responses and it will negatively impact your application. We want to hear your authentic voice and experiences.</p>
+                        
+                        <div class="form-field">
+                            <label for="passion">What is something you are passionate about outside of technology? Give an example of how you pursue this passion. *</label>
+                            <textarea id="passion" name="passion" rows="5" required placeholder="Tell us about your passion and give a specific example..."></textarea>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="difficultPeople">Describe a time when you had to work with someone who was challenging to collaborate with. Give an example of how you handled it. *</label>
+                            <textarea id="difficultPeople" name="difficultPeople" rows="5" required placeholder="Give a specific example of the situation and how you handled it..."></textarea>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="timeManagement">Are you good at managing your time? When faced with a lot of work do you tend to neglect some part of your life or are you able to balance it properly? Give an example of how you manage your time effectively. *</label>
+                            <textarea id="timeManagement" name="timeManagement" rows="5" required placeholder="Tell us about your time management skills, work-life balance, and give a specific example..."></textarea>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="resilienceType">If you are put in a difficult situation do you give up easily or do you work through it? Give an example of how you handled a difficult situation. *</label>
+                            <textarea id="resilienceType" name="resilienceType" rows="6" required placeholder="Tell us about your approach to difficult situations and give a specific example..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="workday-btn-secondary" id="backToExperience">Back</button>
+                        <button type="submit" class="workday-btn-primary">Save and Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Voluntary Disclosures Section -->
+        <div id="disclosuresSection" class="section">
+            <div class="workday-form-container">
+                <h2 class="section-title">Voluntary Disclosures</h2>
+                <p class="section-description">
+                    <span class="required-indicator">* Indicates a required field</span>
+                </p>
+                
+                <form id="disclosuresForm" class="workday-form">
+                    <div class="disclosure-statement">
+                        <h4>Personal Data Statement</h4>
+                        <p>KLA Corporation ("KLA" or the "Company") is an equal employment opportunity employer. The Company is committed to ensuring nondiscrimination in its hiring and selection processes under laws like Title VII of the Civil Rights Act of 1964. KLA is also a federal contractor subject to the Vietnam Era Veterans' Readjustment Assistance Act of 1974 (VEVRAA), which requires that covered Government contractors and subcontractors take affirmative action to employ and advance in employment applicants and employees without regard to their protected veteran status. In order to comply with these requirements, we invite you to check the appropriate boxes below. Submission of this information is voluntary and refusal to provide it will not subject you to any adverse treatment. The information you provide will be kept confidential and separate from other employment records, and will only be used in ways that are consistent with the law.</p>
+                    </div>
+
+                    <div class="veteran-definitions">
+                        <h4>PROTECTED VETERAN STATUS DEFINITIONS:</h4>
+                        <p><strong>Disabled Veteran:</strong> (1) a veteran of the U.S. military, ground, naval or air service who is entitled to compensation (or who but for the receipt of military retired pay would be entitled to compensation) under laws administered by the Secretary of Veterans Affairs; or (2) a person who was discharged or released from active duty because of a service-connected disability.</p>
+                        
+                        <p><strong>Recently Separated Veteran:</strong> a veteran during the three-year period beginning on the date of such veteran's discharge or release from active duty in the U.S. military, ground, naval or air service.</p>
+                        
+                        <p><strong>Active duty wartime or campaign badge veteran:</strong> a veteran who served on active duty in the U.S. military, ground, naval or air service during a war or in a campaign or expedition for which a campaign badge has been authorized under the laws administered by the Department of Defense.</p>
+                        
+                        <p><strong>Armed Forces service medal veteran:</strong> a veteran who, while serving on active duty in the U.S. military, ground, naval or air service, participated in a United States military operation for which an Armed Forces service medal was awarded pursuant to Executive Order 12985 (61 FR 1209).</p>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="veteranStatus">Please select your veteran status: *</label>
+                        <select id="veteranStatus" name="veteranStatus" required>
+                            <option value="">Select One</option>
+                            <option value="disabled">I am a disabled veteran</option>
+                            <option value="recently-separated">I am a recently separated veteran</option>
+                            <option value="active-duty-wartime">I am an active duty wartime or campaign badge veteran</option>
+                            <option value="armed-forces">I am an Armed Forces service medal veteran</option>
+                            <option value="not-veteran">I am not a protected veteran</option>
+                            <option value="no-answer">I don't wish to answer</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="gender">Please select your sex:</label>
+                        <select id="gender" name="gender">
+                            <option value="">Select One</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="no-answer">I don't wish to answer</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="hispanic">Are you Hispanic or Latino - A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin regardless of race?</label>
+                        <select id="hispanic" name="hispanic">
+                            <option value="">Select One</option>
+                            <option value="yes">Yes, I am Hispanic or Latino</option>
+                            <option value="no">No, I am not Hispanic or Latino</option>
+                            <option value="no-answer">I don't wish to answer</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="race">Please select your race: *</label>
+                        <select id="race" name="race" required>
+                            <option value="">Select One</option>
+                            <option value="white">White (Not Hispanic or Latino)</option>
+                            <option value="black">Black or African American (Not Hispanic or Latino)</option>
+                            <option value="hispanic">Hispanic or Latino</option>
+                            <option value="asian">Asian (Not Hispanic or Latino)</option>
+                            <option value="native-american">American Indian or Alaska Native (Not Hispanic or Latino)</option>
+                            <option value="pacific-islander">Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)</option>
+                            <option value="two-or-more">Two or More Races (Not Hispanic or Latino)</option>
+                            <option value="no-answer">I don't wish to answer</option>
+                        </select>
+                    </div>
+
+                    <div class="terms-section">
+                        <h4>Terms and Conditions</h4>
+                        <p>We respect the privacy of candidates who apply for employment at KLA. This Privacy Notice sets forth how we will use the information we obtain when you apply for a position through this career site.</p>
+                        
+                        <div class="terms-dropdown">
+                            <button type="button" class="terms-toggle" id="termsToggle">
+                                <span>Click to view full Terms and Conditions</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </button>
+                            
+                            <div class="terms-content" id="termsContent" style="display: none;">
+                                <div class="terms-text">
+                                    <p><strong>1. ACCEPTANCE OF TERMS</strong></p>
+                                    <p>By accessing and using this career site, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use this site or submit any application materials.</p>
+                                    
+                                    <p><strong>2. APPLICATION PROCESS</strong></p>
+                                    <p>All information provided in your application must be accurate, complete, and truthful. Any false, misleading, or incomplete information may result in disqualification from consideration for employment. You are responsible for ensuring all submitted documents are virus-free and in acceptable formats.</p>
+                                    
+                                    <p><strong>3. DATA COLLECTION AND PRIVACY</strong></p>
+                                    <p>We collect personal information necessary for recruitment and employment purposes. This includes contact information, employment history, educational background, and other relevant professional details. Your information will be processed in accordance with applicable privacy laws and our Privacy Policy.</p>
+                                    
+                                    <p><strong>4. BACKGROUND VERIFICATION</strong></p>
+                                    <p>Successful candidates will be subject to comprehensive background checks including employment verification, educational credential verification, criminal background checks (where legally permitted), and reference checks. Failure to pass required background checks may result in withdrawal of employment offers.</p>
+                                    
+                                    <p><strong>5. EQUAL OPPORTUNITY EMPLOYMENT</strong></p>
+                                    <p>KLA is committed to providing equal employment opportunities to all qualified applicants without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, age, disability, veteran status, or any other characteristic protected by applicable law.</p>
+                                    
+                                    <p><strong>6. INTELLECTUAL PROPERTY</strong></p>
+                                    <p>All content on this career site, including text, graphics, logos, and software, is the property of KLA and is protected by copyright and other intellectual property laws. You may not reproduce, distribute, or create derivative works without express written permission.</p>
+                                    
+                                    <p><strong>7. CONFIDENTIALITY</strong></p>
+                                    <p>During the application process, you may receive confidential information about KLA. You agree to maintain the confidentiality of such information and not disclose it to third parties without prior written consent.</p>
+                                    
+                                    <p><strong>8. LIMITATION OF LIABILITY</strong></p>
+                                    <p>KLA shall not be liable for any direct, indirect, incidental, special, or consequential damages arising from your use of this career site or the application process. This includes but is not limited to technical difficulties, system failures, or data loss.</p>
+                                    
+                                    <p><strong>9. GOVERNING LAW</strong></p>
+                                    <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of the jurisdiction where KLA's headquarters are located, without regard to conflict of law principles.</p>
+                                    
+                                    <p><strong>10. MODIFICATIONS</strong></p>
+                                    <p>KLA reserves the right to modify these Terms and Conditions at any time without prior notice. Continued use of the career site after such modifications constitutes acceptance of the updated terms.</p>
+                                    
+                                    <p><strong>11. CONTACT INFORMATION</strong></p>
+                                    <p>If you have questions about these Terms and Conditions or our recruitment process, please contact our Human Resources department through the official channels provided on our corporate website.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p>*By creating an external account and submitting your interest in employment at KLA, you must agree to the Terms and Conditions to use the Careers Site.</p>
+                        
+                        <p><strong>*Acknowledgment</strong><br>
+                        <strong>Check Box Below*</strong></p>
+                        
+                        <div class="checkbox-field">
+                            <input type="checkbox" id="consentTerms" name="consentTerms" required>
+                            <label for="consentTerms">Yes, I have read and consent to the full terms and conditions above. *</label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="workday-btn-secondary" id="backToQuestions">Back</button>
+                        <button type="submit" class="workday-btn-primary">Save and Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>        <!
+-- Self Identify Section -->
+        <div id="selfIdentifySection" class="section">
+            <div class="workday-form-container">
+                <h2 class="section-title">Self Identify</h2>
+                <p class="section-description">
+                    <span class="required-indicator">* Indicates a required field</span>
+                </p>
+                
+                <form id="selfIdentifyForm" class="workday-form">
+                    <div class="form-field">
+                        <label for="language">Language *</label>
+                        <select id="language" name="language" required>
+                            <option value="">Select One</option>
+                            <option value="english" selected>English</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="french">French</option>
+                            <option value="german">German</option>
+                            <option value="chinese">Chinese</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="disability-section">
+                        <h4>Voluntary Self-Identification of Disability</h4>
+                        <div class="form-info">
+                            <p><strong>Form</strong><br>CC-305</p>
+                            <p><strong>OMB Control Number</strong><br>1250-0005</p>
+                            <p><strong>Expires</strong><br>04/30/2026</p>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="disabilityName">Name *</label>
+                            <input type="text" id="disabilityName" name="disabilityName" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="employeeId">Employee ID (if applicable)</label>
+                            <input type="text" id="employeeId" name="employeeId">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="disabilityDate">Date *</label>
+                            <input type="date" id="disabilityDate" name="disabilityDate" required>
+                        </div>
+
+                        <div class="disability-explanation">
+                            <h4>Why are you being asked to complete this form?</h4>
+                            <p>We are a federal contractor or subcontractor. The law requires us to provide equal employment opportunity to qualified people with disabilities. We have a goal of having at least 7% of our workers as people with disabilities. The law says we must measure our progress towards this goal. To do this, we must ask applicants and employees if they have a disability or have ever had one. People can become disabled, so we need to ask this question at least every five years.</p>
+                            
+                            <p>Completing this form is voluntary, and we hope that you will choose to do so. Your answer is confidential. No one who makes hiring decisions will see it. Your decision to complete the form and your answer will not harm you in any way. If you want to learn more about the law or this form, visit the U.S. Department of Labor's Office of Federal Contract Compliance Programs (OFCCP) website at <a href="https://www.dol.gov/ofccp" target="_blank">www.dol.gov/ofccp</a>.</p>
+                        </div>
+
+                        <div class="disability-definition">
+                            <h4>How do you know if you have a disability?</h4>
+                            <p>A disability is a condition that substantially limits one or more of your "major life activities." If you have or have ever had such a condition, you are a person with a disability. <strong>Disabilities include, but are not limited to:</strong></p>
+                            
+                            <ul class="disability-list">
+                                <li>Alcohol or other substance use disorder (not currently using drugs illegally)</li>
+                                <li>Autoimmune disorder, for example, lupus, fibromyalgia, rheumatoid arthritis, HIV/AIDS</li>
+                                <li>Blind or low vision</li>
+                                <li>Cancer (past or present)</li>
+                                <li>Cardiovascular or heart disease</li>
+                                <li>Celiac disease</li>
+                                <li>Cerebral palsy</li>
+                                <li>Deaf or serious difficulty hearing</li>
+                                <li>Diabetes</li>
+                                <li>Disfigurement, for example, disfigurement caused by burns, wounds, accidents, or congenital disorders</li>
+                                <li>Epilepsy or other seizure disorder</li>
+                                <li>Gastrointestinal disorders, for example, Crohn's Disease, irritable bowel syndrome</li>
+                                <li>Intellectual or developmental disability</li>
+                                <li>Mental health conditions, for example, depression, bipolar disorder, anxiety disorder, schizophrenia, PTSD</li>
+                                <li>Missing limbs or partially missing limbs</li>
+                                <li>Mobility impairment, benefiting from the use of a wheelchair, scooter, walker, leg brace(s) and/or other supports</li>
+                                <li>Nervous system condition, for example, migraine headaches, Parkinson's disease, multiple sclerosis (MS)</li>
+                                <li>Neurodivergence, for example, attention-deficit/hyperactivity disorder (ADHD), autism spectrum disorder, dyslexia, dyspraxia, other learning disabilities</li>
+                                <li>Partial or complete paralysis (any cause)</li>
+                                <li>Pulmonary or respiratory conditions, for example, tuberculosis, asthma, emphysema</li>
+                                <li>Short stature (dwarfism)</li>
+                                <li>Traumatic brain injury</li>
+                            </ul>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Please check one of the boxes below: *</label>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="disabilityStatus" value="yes" required>
+                                    Yes, I have a disability, or have had one in the past
+                                </label>
+                                <label>
+                                    <input type="radio" name="disabilityStatus" value="no" required>
+                                    No, I do not have a disability and have not had one in the past
+                                </label>
+                                <label>
+                                    <input type="radio" name="disabilityStatus" value="no-answer" required>
+                                    I do not want to answer
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="public-burden">
+                            <p><strong>PUBLIC BURDEN STATEMENT:</strong> According to the Paperwork Reduction Act of 1995 no persons are required to respond to a collection of information unless such collection displays a valid OMB control number. This survey should take about 5 minutes to complete.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="workday-btn-secondary" id="backToDisclosures">Back</button>
+                        <button type="submit" class="workday-btn-primary">Save and Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Review Section -->
+        <div id="reviewSection" class="section">
+            <div class="workday-form-container">
+                <h2 class="section-title">Review</h2>
+                <p class="section-description">
+                    Please review your application before submitting.
+                </p>
+                
+                <div id="reviewContent" class="review-content">
+                    <!-- Review content will be populated by JavaScript -->
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="workday-btn-secondary" id="backToSelfIdentify">Back</button>
+                    <button type="button" class="workday-btn-primary" id="submitApplication">Submit Application</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Section -->
+        <div id="successSection" class="section">
+            <div class="workday-form-container text-center">
+                <div class="success-icon">✅</div>
+                <h2>Application Submitted Successfully!</h2>
+                <p>Thank you for your interest in the Software Engineer position.</p>
+                <p>We have received your application and will review it carefully. You can expect to hear from us within 5-7 business days.</p>
+                <div class="application-id">
+                    <strong>Application ID: <span id="applicationId"></span></strong>
+                </div>
+                <p>Please save this ID for your records.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="workday-footer">
+            <div class="footer-content">
+                <p>Follow Us</p>
+                <div class="social-icons">
+                    <span>💼</span>
+                    <span>📘</span>
+                    <span>🐦</span>
+                </div>
+                <p><a href="#" class="privacy-link">Privacy Policy</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

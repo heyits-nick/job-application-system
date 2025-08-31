@@ -1,0 +1,1122 @@
+/* Workday Style Application */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.5;
+}
+
+.workday-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    min-height: 100vh;
+}
+
+/* Header */
+.workday-header {
+    padding: 20px 40px;
+    border-bottom: 1px solid #e0e0e0;
+    background: white;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #4285f4;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-arrow {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.back-text {
+    color: #4285f4;
+    text-decoration: none;
+}
+
+.back-text:hover {
+    text-decoration: underline;
+}
+
+.job-title {
+    font-size: 24px;
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+}
+
+/* Progress Steps */
+.progress-container {
+    padding: 30px 40px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e0e0e0;
+    z-index: 1;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    background: white;
+    padding: 0 10px;
+}
+
+.step-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.step.active .step-circle {
+    background: #d73502;
+    color: white;
+}
+
+.step.completed .step-circle {
+    background: #34a853;
+    color: white;
+}
+
+.step-label {
+    font-size: 12px;
+    color: #666;
+    max-width: 80px;
+    line-height: 1.3;
+}
+
+.step.active .step-label {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Form Container */
+.workday-form-container {
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.section-description {
+    color: #666;
+    margin-bottom: 30px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Password Requirements */
+.password-requirements {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.password-requirements h4 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.password-requirements ul {
+    list-style: none;
+    padding: 0;
+}
+
+.password-requirements li {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 4px;
+    padding-left: 8px;
+    position: relative;
+}
+
+.password-requirements li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #666;
+}
+
+/* Form Fields */
+.workday-form {
+    width: 100%;
+}
+
+.form-field {
+    margin-bottom: 24px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 16px;
+    background: white;
+    transition: border-color 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+}
+
+.form-field textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Agreement Section */
+.agreement-section {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.agreement-section p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.checkbox-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.checkbox-field input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    margin-top: 2px;
+}
+
+.checkbox-field label {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Buttons */
+.workday-btn-primary {
+    width: 100%;
+    background: #d73502;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-bottom: 24px;
+}
+
+.workday-btn-primary:hover:not(:disabled) {
+    background: #c12e02;
+}
+
+.workday-btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.workday-btn-secondary {
+    background: white;
+    color: #4285f4;
+    border: 1px solid #4285f4;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.workday-btn-secondary:hover {
+    background: #f8f9ff;
+}
+
+/* Sign-in Links */
+.signin-links {
+    text-align: center;
+}
+
+.signin-links p {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+.signin-links a {
+    color: #4285f4;
+    text-decoration: none;
+}
+
+.signin-links a:hover {
+    text-decoration: underline;
+}
+
+.forgot-password {
+    color: #4285f4 !important;
+}
+
+/* Radio and Checkbox Groups */
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.radio-group label,
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.radio-group input,
+.checkbox-group input {
+    width: auto;
+    margin-right: 12px;
+    margin-bottom: 0;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed #d0d0d0;
+    border-radius: 4px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fafafa;
+}
+
+.upload-area:hover {
+    border-color: #4285f4;
+    background: #f8f9ff;
+}
+
+.upload-area.dragover {
+    border-color: #4285f4;
+    background: #f0f4ff;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #666;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.upload-area p {
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.upload-note {
+    font-size: 12px;
+    color: #999;
+}
+
+/* File Info */
+.file-info {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.file-details span {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .workday-header {
+        padding: 15px 20px;
+    }
+    
+    .progress-container {
+        padding: 20px;
+    }
+    
+    .progress-steps {
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .progress-steps::before {
+        display: none;
+    }
+    
+    .workday-form-container {
+        padding: 20px;
+    }
+    
+    .step-label {
+        max-width: 100px;
+    }
+}
+
+/* Hidden utility */
+.hidden {
+    display: none !important;
+}/* Foote
+r */
+.workday-footer {
+    background: #f7f7f7;
+    border-top: 1px solid #e0e0e0;
+    padding: 30px 40px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.footer-content p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.social-icons span {
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.social-icons span:hover {
+    opacity: 1;
+}
+
+/* Workday Notifications */
+.workday-notification {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}/* Add
+itional Workday Styles for Complete Application */
+
+/* Required field indicator */
+.required-indicator {
+    color: #d73502;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.section-note {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Experience Section Styles */
+.experience-note {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.experience-note h4 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.experience-note p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.work-experience-section {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fafafa;
+}
+
+.work-experience-section h4 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 8px;
+}
+
+.delete-btn:hover {
+    color: #d73502;
+}
+
+.date-range {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Disclosure Section Styles */
+.disclosure-statement {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.disclosure-statement h4 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.disclosure-statement p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.veteran-definitions {
+    margin-bottom: 24px;
+}
+
+.veteran-definitions h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.veteran-definitions p {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.terms-section {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.terms-section h4 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.terms-section p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.privacy-link {
+    color: #4285f4;
+    text-decoration: none;
+}
+
+.privacy-link:hover {
+    text-decoration: underline;
+}
+
+/* Self Identify Section Styles */
+.disability-section {
+    margin-top: 24px;
+}
+
+.form-info {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.form-info p {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.form-info p:last-child {
+    margin-bottom: 0;
+}
+
+.disability-explanation {
+    margin: 24px 0;
+}
+
+.disability-explanation h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.disability-explanation p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.disability-definition {
+    margin: 24px 0;
+}
+
+.disability-definition h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.disability-definition p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.disability-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 12px 0;
+}
+
+.disability-list li {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.public-burden {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 16px;
+    margin-top: 20px;
+}
+
+.public-burden p {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.form-actions button {
+    min-width: 120px;
+}
+
+/* Review Section */
+.review-content {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.review-section {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.review-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.review-section h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.review-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.review-label {
+    font-weight: 500;
+    color: #666;
+}
+
+.review-value {
+    color: #333;
+    text-align: right;
+    max-width: 60%;
+}
+
+/* Success Section */
+.text-center {
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.application-id {
+    background: #e7f3ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .date-range {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .experience-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .review-item {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .review-value {
+        text-align: left;
+        max-width: 100%;
+    }
+}/
+* Add/Delete Experience Styles */
+.add-experience-section {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.experience-header h4 {
+    margin: 0;
+}
+
+.delete-experience-btn {
+    background: none;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.delete-experience-btn:hover {
+    background: #dc3545;
+    color: white;
+}
+
+.delete-experience-btn:before {
+    content: "🗑️ ";
+    margin-right: 4px;
+}
+
+/* Hide delete button for first experience */
+.work-experience-section[data-experience="1"] .delete-experience-btn {
+    display: none;
+}
+
+/* Experience container */
+#experienceContainer {
+    margin-bottom: 20px;
+}
+
+.work-experience-section {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+/* Animation for new experiences */
+.work-experience-section.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.work-experience-section.fade-out {
+    animation: fadeOut 0.3s ease-out;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}/
+* Resume Upload Section Styles */
+.resume-upload-section {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 24px;
+    margin: 24px 0;
+}
+
+.resume-upload-section h4 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+}
+
+.resume-upload-section .form-field {
+    margin-bottom: 0;
+}
+
+.resume-upload-section input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.resume-upload-section input[type="file"]:hover {
+    border-color: #4285f4;
+}
+
+.resume-upload-section input[type="file"]:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+}
+
+.file-upload-note {
+    margin-top: 8px;
+}
+
+.file-upload-note small {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* File upload validation styles */
+.resume-upload-section input[type="file"].error {
+    border-color: #d73502;
+}
+
+.resume-upload-section .error-message {
+    color: #d73502;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* Responsive adjustments for resume upload */
+@media (max-width: 768px) {
+    .resume-upload-section {
+        padding: 16px;
+        margin: 16px 0;
+    }
+    
+    .resume-upload-section h4 {
+        font-size: 16px;
+    }
+}/
+* Expandable Terms and Conditions Styles */
+.terms-dropdown {
+    margin: 16px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.terms-toggle {
+    width: 100%;
+    padding: 16px;
+    background: #f8f9fa;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.terms-toggle:hover {
+    background: #e9ecef;
+}
+
+.terms-toggle.expanded {
+    border-radius: 4px 4px 0 0;
+}
+
+.dropdown-arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.terms-toggle.expanded .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.terms-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.terms-content.expanded {
+    max-height: 800px;
+    overflow-y: auto;
+}
+
+.terms-text {
+    padding: 20px;
+    font-size: 9px;
+    line-height: 1.3;
+    color: #555;
+}
+
+.terms-text p {
+    margin: 0 0 12px 0;
+}
+
+.terms-text p:last-child {
+    margin-bottom: 0;
+}
+
+.terms-text strong {
+    font-weight: 600;
+    color: #333;
+    font-size: 10px;
+}
+
+/* Responsive adjustments for terms */
+@media (max-width: 768px) {
+    .terms-toggle {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .terms-text {
+        padding: 16px;
+        font-size: 8px;
+    }
+    
+    .terms-content.expanded {
+        max-height: 600px;
+    }
+}/* Addr
+ess Section Styles */
+.address-section {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 16px 0;
+}
+
+.address-section h4 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.address-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.address-section .form-field {
+    margin-bottom: 16px;
+}
+
+.address-section .form-field:last-child {
+    margin-bottom: 0;
+}
+
+.address-section input {
+    width: 100%;
+}
+
+/* Responsive adjustments for address */
+@media (max-width: 768px) {
+    .address-section {
+        padding: 16px;
+    }
+    
+    .address-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .address-section h4 {
+        font-size: 14px;
+    }
+}
