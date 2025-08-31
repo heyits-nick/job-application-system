@@ -169,7 +169,7 @@ app.get('/api/download-applications', (req, res) => {
                 sponsorshipRequired: app.formData?.sponsorshipRequired || 'N/A',
                 optTraining: app.formData?.optTraining || 'N/A',
                 yearsOfExperience: app.formData?.yearsExperience || 'N/A',
-                previousKLAEmployee: app.formData?.previousKLA || 'N/A'
+                previousDIceEmployee: app.formData?.previousKLA || 'N/A'
             },
             
             // Behavioral Assessment
