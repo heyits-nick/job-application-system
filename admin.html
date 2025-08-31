@@ -195,6 +195,50 @@
             transform: rotate(180deg);
         }
 
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .behavioral-answer {
+            max-height: 100px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+
+        .resume-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: #2c5aa0;
+            color: white;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-top: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #1e3d6f;
+            color: white;
+        }
+
+        .detail-value a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .detail-value a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             .stats-bar {
                 flex-direction: column;
@@ -203,6 +247,10 @@
 
             .detail-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .download-btn {
+                margin-bottom: 4px;
             }
         }
     </style>
@@ -292,36 +340,81 @@
 
         function renderApplicationDetails(app) {
             const data = app.formData || {};
+            const user = app.user || {};
             
             return `
                 <div class="detail-section">
-                    <h4>Personal Information</h4>
+                    <h4>Account Information</h4>
                     <div class="detail-grid">
                         <div class="detail-item">
-                            <div class="detail-label">Full Name</div>
-                            <div class="detail-value">${data.firstName || 'N/A'} ${data.lastName || 'N/A'}</div>
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">${user.email || 'N/A'}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">Phone</div>
-                            <div class="detail-value">${data.phone || 'N/A'}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Address</div>
-                            <div class="detail-value">${data.unitNumber || ''} ${data.streetAddress || ''}, ${data.city || ''}, ${data.country || ''} ${data.pinCode || ''}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">LinkedIn</div>
-                            <div class="detail-value">${data.linkedin || 'N/A'}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">GitHub</div>
-                            <div class="detail-value">${data.github || 'N/A'}</div>
+                            <div class="detail-label">Account Created</div>
+                            <div class="detail-value">${user.createdAt ? new Date(user.createdAt).toLocaleString() : 'N/A'}</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="detail-section">
-                    <h4>Work Experience</h4>
+                    <h4>Personal Information</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">First Name</div>
+                            <div class="detail-value">${data.firstName || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Last Name</div>
+                            <div class="detail-value">${data.lastName || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Phone Number</div>
+                            <div class="detail-value">${data.phone || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">LinkedIn Profile</div>
+                            <div class="detail-value">${data.linkedin ? `<a href="${data.linkedin}" target="_blank">${data.linkedin}</a>` : 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">GitHub Profile</div>
+                            <div class="detail-value">${data.github ? `<a href="${data.github}" target="_blank">${data.github}</a>` : 'N/A'}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Complete Address</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Unit Number</div>
+                            <div class="detail-value">${data.unitNumber || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Street Address</div>
+                            <div class="detail-value">${data.streetAddress || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">City</div>
+                            <div class="detail-value">${data.city || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Country</div>
+                            <div class="detail-value">${data.country || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Pin Code</div>
+                            <div class="detail-value">${data.pinCode || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Full Address</div>
+                            <div class="detail-value">${[data.unitNumber, data.streetAddress, data.city, data.country, data.pinCode].filter(Boolean).join(', ')}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Work Experience & Resume</h4>
                     <div class="detail-grid">
                         <div class="detail-item">
                             <div class="detail-label">Job Title</div>
@@ -332,40 +425,135 @@
                             <div class="detail-value">${data.company1 || 'N/A'}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">Duration</div>
-                            <div class="detail-value">${data.fromDate1 || 'N/A'} - ${data.toDate1 || 'Present'}</div>
+                            <div class="detail-label">Work Location</div>
+                            <div class="detail-value">${data.location1 || 'N/A'}</div>
                         </div>
                         <div class="detail-item">
+                            <div class="detail-label">Currently Working</div>
+                            <div class="detail-value">${data.currentWork1 ? 'Yes' : 'No'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Start Date</div>
+                            <div class="detail-value">${data.fromDate1 || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">End Date</div>
+                            <div class="detail-value">${data.toDate1 || (data.currentWork1 ? 'Present' : 'N/A')}</div>
+                        </div>
+                        <div class="detail-item full-width">
                             <div class="detail-label">Role Description</div>
                             <div class="detail-value">${data.roleDescription1 || 'N/A'}</div>
                         </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Resume File</div>
+                            <div class="detail-value">
+                                ${app.resume ? `
+                                    <div class="resume-info">
+                                        <strong>${app.resume.originalName}</strong><br>
+                                        <small>Size: ${(app.resume.size / 1024).toFixed(1)} KB</small><br>
+                                        <a href="/uploads/${app.resume.filename}" target="_blank" class="download-btn">📄 View Resume</a>
+                                        <a href="/uploads/${app.resume.filename}" download="${app.resume.originalName}" class="download-btn">⬇️ Download</a>
+                                    </div>
+                                ` : 'No resume uploaded'}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="detail-section">
-                    <h4>Behavioral Questions</h4>
+                    <h4>Application Questions</h4>
                     <div class="detail-grid">
                         <div class="detail-item">
-                            <div class="detail-label">Passion</div>
-                            <div class="detail-value">${data.passion || 'N/A'}</div>
+                            <div class="detail-label">Meets Basic Requirements</div>
+                            <div class="detail-value">${data.basicRequirements || 'N/A'}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">Difficult People</div>
-                            <div class="detail-value">${data.difficultPeople || 'N/A'}</div>
+                            <div class="detail-label">Work Authorization</div>
+                            <div class="detail-value">${data.workAuthorized || 'N/A'}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">Time Management</div>
-                            <div class="detail-value">${data.timeManagement || 'N/A'}</div>
+                            <div class="detail-label">Sponsorship Required</div>
+                            <div class="detail-value">${data.sponsorshipRequired || 'N/A'}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">Resilience</div>
-                            <div class="detail-value">${data.resilienceType || 'N/A'}</div>
+                            <div class="detail-label">OPT Training</div>
+                            <div class="detail-value">${data.optTraining || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Years of Experience</div>
+                            <div class="detail-value">${data.yearsExperience || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Previous KLA Employee</div>
+                            <div class="detail-value">${data.previousKLA || 'N/A'}</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="detail-section">
-                    <h4>Application Details</h4>
+                    <h4>Behavioral Assessment Questions</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item full-width">
+                            <div class="detail-label">What are you passionate about outside of technology?</div>
+                            <div class="detail-value behavioral-answer">${data.passion || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item full-width">
+                            <div class="detail-label">Describe working with challenging people</div>
+                            <div class="detail-value behavioral-answer">${data.difficultPeople || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item full-width">
+                            <div class="detail-label">Time management and work-life balance</div>
+                            <div class="detail-value behavioral-answer">${data.timeManagement || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item full-width">
+                            <div class="detail-label">Handling difficult situations</div>
+                            <div class="detail-value behavioral-answer">${data.resilienceType || 'N/A'}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Voluntary Disclosures</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Veteran Status</div>
+                            <div class="detail-value">${data.veteranStatus || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Race/Ethnicity</div>
+                            <div class="detail-value">${data.race || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Consent to Terms</div>
+                            <div class="detail-value">${data.consentTerms ? 'Yes' : 'No'}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Self-Identification (Disability)</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Language</div>
+                            <div class="detail-value">${data.language || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Disability Name</div>
+                            <div class="detail-value">${data.disabilityName || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Disability Date</div>
+                            <div class="detail-value">${data.disabilityDate || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Disability Status</div>
+                            <div class="detail-value">${data.disabilityStatus || 'N/A'}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Application Metadata</h4>
                     <div class="detail-grid">
                         <div class="detail-item">
                             <div class="detail-label">Application ID</div>
@@ -376,8 +564,8 @@
                             <div class="detail-value">${new Date(app.submissionTime).toLocaleString()}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">Resume</div>
-                            <div class="detail-value">${app.resume ? app.resume.originalName : 'No resume uploaded'}</div>
+                            <div class="detail-label">Application Status</div>
+                            <div class="detail-value">${app.status || 'N/A'}</div>
                         </div>
                     </div>
                 </div>

@@ -106,6 +106,19 @@ app.get('/api/applications/:id', (req, res) => {
     }
 });
 
+// Serve uploaded files (resumes)
+app.get('/uploads/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filepath = path.join(__dirname, 'uploads', filename);
+    
+    // Check if file exists
+    if (fs.existsSync(filepath)) {
+        res.sendFile(filepath);
+    } else {
+        res.status(404).json({ message: 'File not found' });
+    }
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
