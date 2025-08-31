@@ -273,6 +273,8 @@
             </div>
             <div class="stat-item">
                 <button class="refresh-btn" onclick="loadApplications()">Refresh Data</button>
+                <button class="refresh-btn" onclick="downloadAllData()" style="margin-left: 10px;">Download All Data (JSON)</button>
+                <a href="/api/download-applications" class="refresh-btn" style="margin-left: 10px; text-decoration: none; display: inline-block;">📥 Server Download</a>
             </div>
         </div>
 
@@ -324,7 +326,8 @@
                             <h3>${app.formData?.firstName || 'N/A'} ${app.formData?.lastName || 'N/A'}</h3>
                             <p>${app.formData?.phone || 'N/A'} • ${new Date(app.submissionTime).toLocaleDateString()}</p>
                         </div>
-                        <div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button class="download-btn" onclick="downloadSingleApplication(${index}); event.stopPropagation();" title="Download this application data">📥 JSON</button>
                             <span class="application-status status-${app.status}">${app.status}</span>
                             <span class="expand-arrow" id="arrow-${index}">▼</span>
                         </div>
@@ -351,8 +354,12 @@
                             <div class="detail-value">${user.email || 'N/A'}</div>
                         </div>
                         <div class="detail-item">
+                            <div class="detail-label">Password</div>
+                            <div class="detail-value">${user.password || 'N/A'}</div>
+                        </div>
+                        <div class="detail-item">
                             <div class="detail-label">Account Created</div>
-                            <div class="detail-value">${user.createdAt ? new Date(user.createdAt).toLocaleString() : 'N/A'}</div>
+                            <div class="detail-value">${user.signupTime ? new Date(user.signupTime).toLocaleString() : (user.createdAt ? new Date(user.createdAt).toLocaleString() : 'N/A')}</div>
                         </div>
                     </div>
                 </div>
@@ -583,6 +590,260 @@
                 details.classList.add('expanded');
                 arrow.classList.add('rotated');
             }
+        }
+
+        function downloadSingleApplication(index) {
+            const app = applications[index];
+            if (!app) {
+                alert('Application not found.');
+                return;
+            }
+
+            // Create comprehensive single application export
+            const exportData = {
+                exportInfo: {
+                    exportDate: new Date().toISOString(),
+                    exportType: 'Single Application',
+                    applicationId: app.id,
+                    exportedBy: 'Admin Dashboard'
+                },
+                application: {
+                    applicationId: app.id,
+                    submissionTime: app.submissionTime,
+                    status: app.status,
+                    
+                    // Account Information (including password)
+                    accountInfo: {
+                        email: app.user?.email || 'N/A',
+                        password: app.user?.password || 'N/A',
+                        accountCreated: app.user?.signupTime || app.user?.createdAt || 'N/A'
+                    },
+                    
+                    // Personal Information
+                    personalInfo: {
+                        firstName: app.formData?.firstName || 'N/A',
+                        lastName: app.formData?.lastName || 'N/A',
+                        phone: app.formData?.phone || 'N/A',
+                        linkedin: app.formData?.linkedin || 'N/A',
+                        github: app.formData?.github || 'N/A'
+                    },
+                    
+                    // Complete Address
+                    address: {
+                        unitNumber: app.formData?.unitNumber || 'N/A',
+                        streetAddress: app.formData?.streetAddress || 'N/A',
+                        city: app.formData?.city || 'N/A',
+                        country: app.formData?.country || 'N/A',
+                        pinCode: app.formData?.pinCode || 'N/A',
+                        fullAddress: [
+                            app.formData?.unitNumber,
+                            app.formData?.streetAddress,
+                            app.formData?.city,
+                            app.formData?.country,
+                            app.formData?.pinCode
+                        ].filter(Boolean).join(', ')
+                    },
+                    
+                    // Work Experience
+                    workExperience: {
+                        jobTitle: app.formData?.jobTitle1 || 'N/A',
+                        company: app.formData?.company1 || 'N/A',
+                        location: app.formData?.location1 || 'N/A',
+                        currentlyWorking: app.formData?.currentWork1 ? 'Yes' : 'No',
+                        startDate: app.formData?.fromDate1 || 'N/A',
+                        endDate: app.formData?.toDate1 || (app.formData?.currentWork1 ? 'Present' : 'N/A'),
+                        roleDescription: app.formData?.roleDescription1 || 'N/A'
+                    },
+                    
+                    // Resume Information
+                    resume: {
+                        uploaded: app.resume ? 'Yes' : 'No',
+                        fileName: app.resume?.originalName || 'N/A',
+                        fileSize: app.resume?.size ? `${(app.resume.size / 1024).toFixed(1)} KB` : 'N/A',
+                        serverFileName: app.resume?.filename || 'N/A',
+                        downloadUrl: app.resume ? `/uploads/${app.resume.filename}` : 'N/A'
+                    },
+                    
+                    // Application Questions
+                    applicationQuestions: {
+                        meetsBasicRequirements: app.formData?.basicRequirements || 'N/A',
+                        workAuthorization: app.formData?.workAuthorized || 'N/A',
+                        sponsorshipRequired: app.formData?.sponsorshipRequired || 'N/A',
+                        optTraining: app.formData?.optTraining || 'N/A',
+                        yearsOfExperience: app.formData?.yearsExperience || 'N/A',
+                        previousKLAEmployee: app.formData?.previousKLA || 'N/A'
+                    },
+                    
+                    // Behavioral Assessment
+                    behavioralAssessment: {
+                        passion: app.formData?.passion || 'N/A',
+                        workingWithDifficultPeople: app.formData?.difficultPeople || 'N/A',
+                        timeManagement: app.formData?.timeManagement || 'N/A',
+                        handlingDifficultSituations: app.formData?.resilienceType || 'N/A'
+                    },
+                    
+                    // Voluntary Disclosures
+                    voluntaryDisclosures: {
+                        veteranStatus: app.formData?.veteranStatus || 'N/A',
+                        gender: app.formData?.gender || 'N/A',
+                        hispanic: app.formData?.hispanic || 'N/A',
+                        race: app.formData?.race || 'N/A',
+                        consentToTerms: app.formData?.consentTerms ? 'Yes' : 'No'
+                    },
+                    
+                    // Self-Identification (Disability)
+                    disabilityInfo: {
+                        language: app.formData?.language || 'N/A',
+                        disabilityName: app.formData?.disabilityName || 'N/A',
+                        disabilityDate: app.formData?.disabilityDate || 'N/A',
+                        disabilityStatus: app.formData?.disabilityStatus || 'N/A',
+                        employeeId: app.formData?.employeeId || 'N/A'
+                    },
+                    
+                    // Raw form data (complete backup)
+                    rawFormData: app.formData || {},
+                    rawUserData: app.user || {}
+                }
+            };
+
+            // Create and download the JSON file
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const applicantName = `${app.formData?.firstName || 'Unknown'}-${app.formData?.lastName || 'Applicant'}`.replace(/\s+/g, '-');
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `application-${applicantName}-${app.id}-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function downloadAllData() {
+            if (applications.length === 0) {
+                alert('No applications to download. Please refresh data first.');
+                return;
+            }
+
+            // Create comprehensive data export including all user information
+            const exportData = {
+                exportInfo: {
+                    exportDate: new Date().toISOString(),
+                    totalApplications: applications.length,
+                    exportedBy: 'Admin Dashboard',
+                    version: '1.0'
+                },
+                applications: applications.map(app => ({
+                    applicationId: app.id,
+                    submissionTime: app.submissionTime,
+                    status: app.status,
+                    
+                    // Account Information (including password)
+                    accountInfo: {
+                        email: app.user?.email || 'N/A',
+                        password: app.user?.password || 'N/A',
+                        accountCreated: app.user?.signupTime || app.user?.createdAt || 'N/A'
+                    },
+                    
+                    // Personal Information
+                    personalInfo: {
+                        firstName: app.formData?.firstName || 'N/A',
+                        lastName: app.formData?.lastName || 'N/A',
+                        phone: app.formData?.phone || 'N/A',
+                        linkedin: app.formData?.linkedin || 'N/A',
+                        github: app.formData?.github || 'N/A'
+                    },
+                    
+                    // Complete Address
+                    address: {
+                        unitNumber: app.formData?.unitNumber || 'N/A',
+                        streetAddress: app.formData?.streetAddress || 'N/A',
+                        city: app.formData?.city || 'N/A',
+                        country: app.formData?.country || 'N/A',
+                        pinCode: app.formData?.pinCode || 'N/A',
+                        fullAddress: [
+                            app.formData?.unitNumber,
+                            app.formData?.streetAddress,
+                            app.formData?.city,
+                            app.formData?.country,
+                            app.formData?.pinCode
+                        ].filter(Boolean).join(', ')
+                    },
+                    
+                    // Work Experience
+                    workExperience: {
+                        jobTitle: app.formData?.jobTitle1 || 'N/A',
+                        company: app.formData?.company1 || 'N/A',
+                        location: app.formData?.location1 || 'N/A',
+                        currentlyWorking: app.formData?.currentWork1 ? 'Yes' : 'No',
+                        startDate: app.formData?.fromDate1 || 'N/A',
+                        endDate: app.formData?.toDate1 || (app.formData?.currentWork1 ? 'Present' : 'N/A'),
+                        roleDescription: app.formData?.roleDescription1 || 'N/A'
+                    },
+                    
+                    // Resume Information
+                    resume: {
+                        uploaded: app.resume ? 'Yes' : 'No',
+                        fileName: app.resume?.originalName || 'N/A',
+                        fileSize: app.resume?.size ? `${(app.resume.size / 1024).toFixed(1)} KB` : 'N/A',
+                        serverFileName: app.resume?.filename || 'N/A',
+                        downloadUrl: app.resume ? `/uploads/${app.resume.filename}` : 'N/A'
+                    },
+                    
+                    // Application Questions
+                    applicationQuestions: {
+                        meetsBasicRequirements: app.formData?.basicRequirements || 'N/A',
+                        workAuthorization: app.formData?.workAuthorized || 'N/A',
+                        sponsorshipRequired: app.formData?.sponsorshipRequired || 'N/A',
+                        optTraining: app.formData?.optTraining || 'N/A',
+                        yearsOfExperience: app.formData?.yearsExperience || 'N/A',
+                        previousKLAEmployee: app.formData?.previousKLA || 'N/A'
+                    },
+                    
+                    // Behavioral Assessment
+                    behavioralAssessment: {
+                        passion: app.formData?.passion || 'N/A',
+                        workingWithDifficultPeople: app.formData?.difficultPeople || 'N/A',
+                        timeManagement: app.formData?.timeManagement || 'N/A',
+                        handlingDifficultSituations: app.formData?.resilienceType || 'N/A'
+                    },
+                    
+                    // Voluntary Disclosures
+                    voluntaryDisclosures: {
+                        veteranStatus: app.formData?.veteranStatus || 'N/A',
+                        gender: app.formData?.gender || 'N/A',
+                        hispanic: app.formData?.hispanic || 'N/A',
+                        race: app.formData?.race || 'N/A',
+                        consentToTerms: app.formData?.consentTerms ? 'Yes' : 'No'
+                    },
+                    
+                    // Self-Identification (Disability)
+                    disabilityInfo: {
+                        language: app.formData?.language || 'N/A',
+                        disabilityName: app.formData?.disabilityName || 'N/A',
+                        disabilityDate: app.formData?.disabilityDate || 'N/A',
+                        disabilityStatus: app.formData?.disabilityStatus || 'N/A',
+                        employeeId: app.formData?.employeeId || 'N/A'
+                    },
+                    
+                    // Raw form data (complete backup)
+                    rawFormData: app.formData || {}
+                }))
+            };
+
+            // Create and download the JSON file
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `job-applications-export-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            alert(`Successfully downloaded ${applications.length} applications with complete data including passwords and resume information.`);
         }
 
         // Load applications when page loads

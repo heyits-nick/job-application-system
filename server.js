@@ -96,6 +96,121 @@ app.get('/api/applications', (req, res) => {
     res.json(applications);
 });
 
+// Download all applications as JSON file
+app.get('/api/download-applications', (req, res) => {
+    const exportData = {
+        exportInfo: {
+            exportDate: new Date().toISOString(),
+            totalApplications: applications.length,
+            exportedBy: 'Server API',
+            version: '1.0'
+        },
+        applications: applications.map(app => ({
+            applicationId: app.id,
+            submissionTime: app.submissionTime,
+            status: app.status,
+            
+            // Account Information (including password)
+            accountInfo: {
+                email: app.user?.email || 'N/A',
+                password: app.user?.password || 'N/A',
+                accountCreated: app.user?.signupTime || app.user?.createdAt || 'N/A'
+            },
+            
+            // Personal Information
+            personalInfo: {
+                firstName: app.formData?.firstName || 'N/A',
+                lastName: app.formData?.lastName || 'N/A',
+                phone: app.formData?.phone || 'N/A',
+                linkedin: app.formData?.linkedin || 'N/A',
+                github: app.formData?.github || 'N/A'
+            },
+            
+            // Complete Address
+            address: {
+                unitNumber: app.formData?.unitNumber || 'N/A',
+                streetAddress: app.formData?.streetAddress || 'N/A',
+                city: app.formData?.city || 'N/A',
+                country: app.formData?.country || 'N/A',
+                pinCode: app.formData?.pinCode || 'N/A',
+                fullAddress: [
+                    app.formData?.unitNumber,
+                    app.formData?.streetAddress,
+                    app.formData?.city,
+                    app.formData?.country,
+                    app.formData?.pinCode
+                ].filter(Boolean).join(', ')
+            },
+            
+            // Work Experience
+            workExperience: {
+                jobTitle: app.formData?.jobTitle1 || 'N/A',
+                company: app.formData?.company1 || 'N/A',
+                location: app.formData?.location1 || 'N/A',
+                currentlyWorking: app.formData?.currentWork1 ? 'Yes' : 'No',
+                startDate: app.formData?.fromDate1 || 'N/A',
+                endDate: app.formData?.toDate1 || (app.formData?.currentWork1 ? 'Present' : 'N/A'),
+                roleDescription: app.formData?.roleDescription1 || 'N/A'
+            },
+            
+            // Resume Information
+            resume: {
+                uploaded: app.resume ? 'Yes' : 'No',
+                fileName: app.resume?.originalName || 'N/A',
+                fileSize: app.resume?.size ? `${(app.resume.size / 1024).toFixed(1)} KB` : 'N/A',
+                serverFileName: app.resume?.filename || 'N/A',
+                downloadUrl: app.resume ? `/uploads/${app.resume.filename}` : 'N/A'
+            },
+            
+            // Application Questions
+            applicationQuestions: {
+                meetsBasicRequirements: app.formData?.basicRequirements || 'N/A',
+                workAuthorization: app.formData?.workAuthorized || 'N/A',
+                sponsorshipRequired: app.formData?.sponsorshipRequired || 'N/A',
+                optTraining: app.formData?.optTraining || 'N/A',
+                yearsOfExperience: app.formData?.yearsExperience || 'N/A',
+                previousKLAEmployee: app.formData?.previousKLA || 'N/A'
+            },
+            
+            // Behavioral Assessment
+            behavioralAssessment: {
+                passion: app.formData?.passion || 'N/A',
+                workingWithDifficultPeople: app.formData?.difficultPeople || 'N/A',
+                timeManagement: app.formData?.timeManagement || 'N/A',
+                handlingDifficultSituations: app.formData?.resilienceType || 'N/A'
+            },
+            
+            // Voluntary Disclosures
+            voluntaryDisclosures: {
+                veteranStatus: app.formData?.veteranStatus || 'N/A',
+                gender: app.formData?.gender || 'N/A',
+                hispanic: app.formData?.hispanic || 'N/A',
+                race: app.formData?.race || 'N/A',
+                consentToTerms: app.formData?.consentTerms ? 'Yes' : 'No'
+            },
+            
+            // Self-Identification (Disability)
+            disabilityInfo: {
+                language: app.formData?.language || 'N/A',
+                disabilityName: app.formData?.disabilityName || 'N/A',
+                disabilityDate: app.formData?.disabilityDate || 'N/A',
+                disabilityStatus: app.formData?.disabilityStatus || 'N/A',
+                employeeId: app.formData?.employeeId || 'N/A'
+            },
+            
+            // Raw form data (complete backup)
+            rawFormData: app.formData || {},
+            rawUserData: app.user || {}
+        }))
+    };
+
+    // Set headers for file download
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Disposition', `attachment; filename="job-applications-export-${new Date().toISOString().split('T')[0]}.json"`);
+    
+    res.json(exportData);
+});
+
 // Get specific application
 app.get('/api/applications/:id', (req, res) => {
     const application = applications.find(app => app.id === req.params.id);
