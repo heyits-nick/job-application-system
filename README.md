@@ -1,6 +1,6 @@
 # Job Application System
 
-A comprehensive job application website similar to Workday, specifically designed for software engineer positions. This system includes user authentication, resume upload, detailed application forms, and complete data collection.
+A comprehensive job application website similar to Workday, specifically designed for Software & Automation Developer positions. This system includes user authentication, resume upload, detailed application forms, and complete data collection.
 
 ## Features
 
