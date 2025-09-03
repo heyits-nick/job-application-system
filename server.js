@@ -177,7 +177,7 @@ app.get('/api/download-applications', (req, res) => {
                 passion: app.formData?.passion || 'N/A',
                 workingWithDifficultPeople: app.formData?.difficultPeople || 'N/A',
                 timeManagement: app.formData?.timeManagement || 'N/A',
-                handlingDifficultSituations: app.formData?.resilienceType || 'N/A'
+                overcomingChallengesAndSetbacks: app.formData?.resilienceType || 'N/A'
             },
             
             // Voluntary Disclosures
