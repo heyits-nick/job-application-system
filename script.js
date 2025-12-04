@@ -277,7 +277,7 @@ function handleQuestionsSubmit(e) {
     // Validate required fields (including behavioral questions)
     const requiredFields = [
         'basicRequirements', 'workAuthorized', 'sponsorshipRequired', 
-        'optTraining', 'yearsExperience', 'previousKLA',
+        'optTraining', 'yearsExperience', 'previousKLA', 'backgroundCheck',
         'passion', 'difficultPeople', 'timeManagement', 'resilienceType'
     ];
     const missingFields = requiredFields.filter(field => !applicationData.formData[field]);
