@@ -121,6 +121,7 @@ app.post('/api/submit-application', upload.fields([
 
 // Get all applications (admin endpoint)
 app.get('/api/applications', (req, res) => {
+    console.log(`GET /api/applications - Returning ${applications.length} applications`);
     res.json(applications);
 });
 

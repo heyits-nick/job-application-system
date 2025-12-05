@@ -288,14 +288,23 @@
 
         async function loadApplications() {
             try {
+                console.log('Fetching applications from /api/applications...');
                 const response = await fetch('/api/applications');
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
                 applications = await response.json();
+                console.log('Loaded applications:', applications.length);
                 
                 updateStats();
                 renderApplications();
             } catch (error) {
+                console.error('Error loading applications:', error);
                 document.getElementById('applicationsList').innerHTML = 
-                    '<div class="error">Error loading applications. Please try again.</div>';
+                    `<div class="error">Error loading applications: ${error.message}. Please try again.</div>`;
             }
         }
 
