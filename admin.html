@@ -464,6 +464,32 @@
                                 ` : 'No resume uploaded'}
                             </div>
                         </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Transcript File</div>
+                            <div class="detail-value">
+                                ${app.transcript ? `
+                                    <div class="resume-info">
+                                        <strong>${app.transcript.originalName}</strong><br>
+                                        <small>Size: ${(app.transcript.size / 1024).toFixed(1)} KB</small><br>
+                                        <a href="/uploads/${app.transcript.filename}" target="_blank" class="download-btn">📄 View Transcript</a>
+                                        <a href="/uploads/${app.transcript.filename}" download="${app.transcript.originalName}" class="download-btn">⬇️ Download</a>
+                                    </div>
+                                ` : 'No transcript uploaded'}
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Cover Letter File</div>
+                            <div class="detail-value">
+                                ${app.coverLetter ? `
+                                    <div class="resume-info">
+                                        <strong>${app.coverLetter.originalName}</strong><br>
+                                        <small>Size: ${(app.coverLetter.size / 1024).toFixed(1)} KB</small><br>
+                                        <a href="/uploads/${app.coverLetter.filename}" target="_blank" class="download-btn">📄 View Cover Letter</a>
+                                        <a href="/uploads/${app.coverLetter.filename}" download="${app.coverLetter.originalName}" class="download-btn">⬇️ Download</a>
+                                    </div>
+                                ` : 'No cover letter uploaded'}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -603,7 +629,7 @@
                 return;
             }
 
-            // Create comprehensive single application export
+            // Create comprehensive single application export with all documents
             const exportData = {
                 exportInfo: {
                     exportDate: new Date().toISOString(),
@@ -668,7 +694,7 @@
                         downloadUrl: app.resume ? `/uploads/${app.resume.filename}` : 'N/A'
                     },
                     
-                    // Application Questions
+                    `n                    // Transcript Information`n                    transcript: {`n                        uploaded: app.transcript ? 'Yes' : 'No',`n                        fileName: app.transcript?.originalName || 'N/A',`n                        fileSize: app.transcript?.size ? `${(app.transcript.size / 1024).toFixed(1)} KB` : 'N/A',`n                        serverFileName: app.transcript?.filename || 'N/A',`n                        downloadUrl: app.transcript ? `/uploads/${app.transcript.filename}` : 'N/A'`n                    },`n                    `n                    // Cover Letter Information`n                    coverLetter: {`n                        uploaded: app.coverLetter ? 'Yes' : 'No',`n                        fileName: app.coverLetter?.originalName || 'N/A',`n                        fileSize: app.coverLetter?.size ? `${(app.coverLetter.size / 1024).toFixed(1)} KB` : 'N/A',`n                        serverFileName: app.coverLetter?.filename || 'N/A',`n                        downloadUrl: app.coverLetter ? `/uploads/${app.coverLetter.filename}` : 'N/A'`n                    },`n                    `n                    // Application Questions
                     applicationQuestions: {
                         meetsBasicRequirements: app.formData?.basicRequirements || 'N/A',
                         workAuthorization: app.formData?.workAuthorized || 'N/A',
@@ -795,7 +821,7 @@
                         downloadUrl: app.resume ? `/uploads/${app.resume.filename}` : 'N/A'
                     },
                     
-                    // Application Questions
+                    `n                    // Transcript Information`n                    transcript: {`n                        uploaded: app.transcript ? 'Yes' : 'No',`n                        fileName: app.transcript?.originalName || 'N/A',`n                        fileSize: app.transcript?.size ? `${(app.transcript.size / 1024).toFixed(1)} KB` : 'N/A',`n                        serverFileName: app.transcript?.filename || 'N/A',`n                        downloadUrl: app.transcript ? `/uploads/${app.transcript.filename}` : 'N/A'`n                    },`n                    `n                    // Cover Letter Information`n                    coverLetter: {`n                        uploaded: app.coverLetter ? 'Yes' : 'No',`n                        fileName: app.coverLetter?.originalName || 'N/A',`n                        fileSize: app.coverLetter?.size ? `${(app.coverLetter.size / 1024).toFixed(1)} KB` : 'N/A',`n                        serverFileName: app.coverLetter?.filename || 'N/A',`n                        downloadUrl: app.coverLetter ? `/uploads/${app.coverLetter.filename}` : 'N/A'`n                    },`n                    `n                    // Application Questions
                     applicationQuestions: {
                         meetsBasicRequirements: app.formData?.basicRequirements || 'N/A',
                         workAuthorization: app.formData?.workAuthorized || 'N/A',
@@ -857,3 +883,5 @@
     </script>
 </body>
 </html>
+
+

@@ -54,18 +54,34 @@ app.get('/', (req, res) => {
 });
 
 // Submit application
-app.post('/api/submit-application', upload.single('resume'), (req, res) => {
+app.post('/api/submit-application', upload.fields([
+    { name: 'resume', maxCount: 1 },
+    { name: 'transcript', maxCount: 1 },
+    { name: 'coverLetter', maxCount: 1 }
+]), (req, res) => {
     try {
         const applicationData = JSON.parse(req.body.applicationData);
         
         const application = {
             id: 'APP-' + Date.now().toString(36).toUpperCase(),
             ...applicationData,
-            resume: req.file ? {
-                filename: req.file.filename,
-                originalName: req.file.originalname,
-                size: req.file.size,
-                path: req.file.path
+            resume: req.files?.resume?.[0] ? {
+                filename: req.files.resume[0].filename,
+                originalName: req.files.resume[0].originalname,
+                size: req.files.resume[0].size,
+                path: req.files.resume[0].path
+            } : null,
+            transcript: req.files?.transcript?.[0] ? {
+                filename: req.files.transcript[0].filename,
+                originalName: req.files.transcript[0].originalname,
+                size: req.files.transcript[0].size,
+                path: req.files.transcript[0].path
+            } : null,
+            coverLetter: req.files?.coverLetter?.[0] ? {
+                filename: req.files.coverLetter[0].filename,
+                originalName: req.files.coverLetter[0].originalname,
+                size: req.files.coverLetter[0].size,
+                path: req.files.coverLetter[0].path
             } : null,
             submissionTime: new Date(),
             status: 'submitted'
@@ -160,6 +176,24 @@ app.get('/api/download-applications', (req, res) => {
                 fileSize: app.resume?.size ? `${(app.resume.size / 1024).toFixed(1)} KB` : 'N/A',
                 serverFileName: app.resume?.filename || 'N/A',
                 downloadUrl: app.resume ? `/uploads/${app.resume.filename}` : 'N/A'
+            },
+            
+            // Transcript Information
+            transcript: {
+                uploaded: app.transcript ? 'Yes' : 'No',
+                fileName: app.transcript?.originalName || 'N/A',
+                fileSize: app.transcript?.size ? `${(app.transcript.size / 1024).toFixed(1)} KB` : 'N/A',
+                serverFileName: app.transcript?.filename || 'N/A',
+                downloadUrl: app.transcript ? `/uploads/${app.transcript.filename}` : 'N/A'
+            },
+            
+            // Cover Letter Information
+            coverLetter: {
+                uploaded: app.coverLetter ? 'Yes' : 'No',
+                fileName: app.coverLetter?.originalName || 'N/A',
+                fileSize: app.coverLetter?.size ? `${(app.coverLetter.size / 1024).toFixed(1)} KB` : 'N/A',
+                serverFileName: app.coverLetter?.filename || 'N/A',
+                downloadUrl: app.coverLetter ? `/uploads/${app.coverLetter.filename}` : 'N/A'
             },
             
             // Application Questions

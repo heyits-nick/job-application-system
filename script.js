@@ -232,17 +232,47 @@ function handleExperienceSubmit(e) {
         return;
     }
     
-    // Validate file size (5MB limit)
+    // Validate transcript upload
+    const transcriptFile = document.getElementById('transcriptUpload').files[0];
+    if (!transcriptFile) {
+        showNotification('Please upload your Bachelor\'s transcript', 'error');
+        return;
+    }
+    
+    // Validate cover letter upload
+    const coverLetterFile = document.getElementById('coverLetterUpload').files[0];
+    if (!coverLetterFile) {
+        showNotification('Please upload your cover letter', 'error');
+        return;
+    }
+    
+    // Validate file sizes (5MB limit)
     const maxSize = 5 * 1024 * 1024; // 5MB in bytes
     if (resumeFile.size > maxSize) {
         showNotification('Resume file size must be less than 5MB', 'error');
         return;
     }
+    if (transcriptFile.size > maxSize) {
+        showNotification('Transcript file size must be less than 5MB', 'error');
+        return;
+    }
+    if (coverLetterFile.size > maxSize) {
+        showNotification('Cover letter file size must be less than 5MB', 'error');
+        return;
+    }
     
-    // Validate file type
+    // Validate file types
     const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
     if (!allowedTypes.includes(resumeFile.type)) {
-        showNotification('Please upload a PDF, DOC, or DOCX file', 'error');
+        showNotification('Please upload a PDF, DOC, or DOCX file for resume', 'error');
+        return;
+    }
+    if (!allowedTypes.includes(transcriptFile.type)) {
+        showNotification('Please upload a PDF, DOC, or DOCX file for transcript', 'error');
+        return;
+    }
+    if (!allowedTypes.includes(coverLetterFile.type)) {
+        showNotification('Please upload a PDF, DOC, or DOCX file for cover letter', 'error');
         return;
     }
     
@@ -255,9 +285,13 @@ function handleExperienceSubmit(e) {
         return;
     }
     
-    // Store resume file info
+    // Store file info
     applicationData.formData.resumeFileName = resumeFile.name;
     applicationData.formData.resumeFileSize = resumeFile.size;
+    applicationData.formData.transcriptFileName = transcriptFile.name;
+    applicationData.formData.transcriptFileSize = transcriptFile.size;
+    applicationData.formData.coverLetterFileName = coverLetterFile.name;
+    applicationData.formData.coverLetterFileSize = coverLetterFile.size;
     
     currentStep = 4;
     updateProgressSteps();
@@ -358,10 +392,20 @@ async function handleFinalSubmit() {
         // Add application data as JSON string
         formData.append('applicationData', JSON.stringify(completeApplication));
         
-        // Add resume file if it exists
+        // Add all document files
         const resumeFile = document.getElementById('resumeUpload').files[0];
         if (resumeFile) {
             formData.append('resume', resumeFile);
+        }
+        
+        const transcriptFile = document.getElementById('transcriptUpload').files[0];
+        if (transcriptFile) {
+            formData.append('transcript', transcriptFile);
+        }
+        
+        const coverLetterFile = document.getElementById('coverLetterUpload').files[0];
+        if (coverLetterFile) {
+            formData.append('coverLetter', coverLetterFile);
         }
         
         // Submit to backend
