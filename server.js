@@ -48,6 +48,18 @@ const upload = multer({
 // Store applications in memory (use database in production)
 let applications = [];
 
+// Load existing applications from file on startup
+try {
+    if (fs.existsSync('./applications.json')) {
+        const data = fs.readFileSync('./applications.json', 'utf8');
+        applications = JSON.parse(data);
+        console.log(`Loaded ${applications.length} existing applications from file`);
+    }
+} catch (error) {
+    console.error('Error loading applications from file:', error);
+    applications = [];
+}
+
 // Routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));

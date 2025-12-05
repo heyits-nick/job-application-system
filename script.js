@@ -225,26 +225,16 @@ function handleExperienceSubmit(e) {
         applicationData.formData[key] = value;
     }
     
-    // Validate resume upload
+    // Validate resume upload (required)
     const resumeFile = document.getElementById('resumeUpload').files[0];
     if (!resumeFile) {
         showNotification('Please upload your resume', 'error');
         return;
     }
     
-    // Validate transcript upload
+    // Get optional files
     const transcriptFile = document.getElementById('transcriptUpload').files[0];
-    if (!transcriptFile) {
-        showNotification('Please upload your Bachelor\'s transcript', 'error');
-        return;
-    }
-    
-    // Validate cover letter upload
     const coverLetterFile = document.getElementById('coverLetterUpload').files[0];
-    if (!coverLetterFile) {
-        showNotification('Please upload your cover letter', 'error');
-        return;
-    }
     
     // Validate file sizes (5MB limit)
     const maxSize = 5 * 1024 * 1024; // 5MB in bytes
@@ -252,11 +242,11 @@ function handleExperienceSubmit(e) {
         showNotification('Resume file size must be less than 5MB', 'error');
         return;
     }
-    if (transcriptFile.size > maxSize) {
+    if (transcriptFile && transcriptFile.size > maxSize) {
         showNotification('Transcript file size must be less than 5MB', 'error');
         return;
     }
-    if (coverLetterFile.size > maxSize) {
+    if (coverLetterFile && coverLetterFile.size > maxSize) {
         showNotification('Cover letter file size must be less than 5MB', 'error');
         return;
     }
@@ -267,11 +257,11 @@ function handleExperienceSubmit(e) {
         showNotification('Please upload a PDF, DOC, or DOCX file for resume', 'error');
         return;
     }
-    if (!allowedTypes.includes(transcriptFile.type)) {
+    if (transcriptFile && !allowedTypes.includes(transcriptFile.type)) {
         showNotification('Please upload a PDF, DOC, or DOCX file for transcript', 'error');
         return;
     }
-    if (!allowedTypes.includes(coverLetterFile.type)) {
+    if (coverLetterFile && !allowedTypes.includes(coverLetterFile.type)) {
         showNotification('Please upload a PDF, DOC, or DOCX file for cover letter', 'error');
         return;
     }
@@ -288,10 +278,14 @@ function handleExperienceSubmit(e) {
     // Store file info
     applicationData.formData.resumeFileName = resumeFile.name;
     applicationData.formData.resumeFileSize = resumeFile.size;
-    applicationData.formData.transcriptFileName = transcriptFile.name;
-    applicationData.formData.transcriptFileSize = transcriptFile.size;
-    applicationData.formData.coverLetterFileName = coverLetterFile.name;
-    applicationData.formData.coverLetterFileSize = coverLetterFile.size;
+    if (transcriptFile) {
+        applicationData.formData.transcriptFileName = transcriptFile.name;
+        applicationData.formData.transcriptFileSize = transcriptFile.size;
+    }
+    if (coverLetterFile) {
+        applicationData.formData.coverLetterFileName = coverLetterFile.name;
+        applicationData.formData.coverLetterFileSize = coverLetterFile.size;
+    }
     
     currentStep = 4;
     updateProgressSteps();
