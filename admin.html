@@ -703,7 +703,26 @@
                         downloadUrl: app.resume ? `/uploads/${app.resume.filename}` : 'N/A'
                     },
                     
-                    `n                    // Transcript Information`n                    transcript: {`n                        uploaded: app.transcript ? 'Yes' : 'No',`n                        fileName: app.transcript?.originalName || 'N/A',`n                        fileSize: app.transcript?.size ? `${(app.transcript.size / 1024).toFixed(1)} KB` : 'N/A',`n                        serverFileName: app.transcript?.filename || 'N/A',`n                        downloadUrl: app.transcript ? `/uploads/${app.transcript.filename}` : 'N/A'`n                    },`n                    `n                    // Cover Letter Information`n                    coverLetter: {`n                        uploaded: app.coverLetter ? 'Yes' : 'No',`n                        fileName: app.coverLetter?.originalName || 'N/A',`n                        fileSize: app.coverLetter?.size ? `${(app.coverLetter.size / 1024).toFixed(1)} KB` : 'N/A',`n                        serverFileName: app.coverLetter?.filename || 'N/A',`n                        downloadUrl: app.coverLetter ? `/uploads/${app.coverLetter.filename}` : 'N/A'`n                    },`n                    `n                    // Application Questions
+                    
+                    // Transcript Information
+                    transcript: {
+                        uploaded: app.transcript ? 'Yes' : 'No',
+                        fileName: app.transcript?.originalName || 'N/A',
+                        fileSize: app.transcript?.size ? `${(app.transcript.size / 1024).toFixed(1)} KB` : 'N/A',
+                        serverFileName: app.transcript?.filename || 'N/A',
+                        downloadUrl: app.transcript ? `/uploads/${app.transcript.filename}` : 'N/A'
+                    },
+                    
+                    // Cover Letter Information
+                    coverLetter: {
+                        uploaded: app.coverLetter ? 'Yes' : 'No',
+                        fileName: app.coverLetter?.originalName || 'N/A',
+                        fileSize: app.coverLetter?.size ? `${(app.coverLetter.size / 1024).toFixed(1)} KB` : 'N/A',
+                        serverFileName: app.coverLetter?.filename || 'N/A',
+                        downloadUrl: app.coverLetter ? `/uploads/${app.coverLetter.filename}` : 'N/A'
+                    },
+                    
+                    // Application Questions
                     applicationQuestions: {
                         meetsBasicRequirements: app.formData?.basicRequirements || 'N/A',
                         workAuthorization: app.formData?.workAuthorized || 'N/A',
@@ -830,7 +849,26 @@
                         downloadUrl: app.resume ? `/uploads/${app.resume.filename}` : 'N/A'
                     },
                     
-                    `n                    // Transcript Information`n                    transcript: {`n                        uploaded: app.transcript ? 'Yes' : 'No',`n                        fileName: app.transcript?.originalName || 'N/A',`n                        fileSize: app.transcript?.size ? `${(app.transcript.size / 1024).toFixed(1)} KB` : 'N/A',`n                        serverFileName: app.transcript?.filename || 'N/A',`n                        downloadUrl: app.transcript ? `/uploads/${app.transcript.filename}` : 'N/A'`n                    },`n                    `n                    // Cover Letter Information`n                    coverLetter: {`n                        uploaded: app.coverLetter ? 'Yes' : 'No',`n                        fileName: app.coverLetter?.originalName || 'N/A',`n                        fileSize: app.coverLetter?.size ? `${(app.coverLetter.size / 1024).toFixed(1)} KB` : 'N/A',`n                        serverFileName: app.coverLetter?.filename || 'N/A',`n                        downloadUrl: app.coverLetter ? `/uploads/${app.coverLetter.filename}` : 'N/A'`n                    },`n                    `n                    // Application Questions
+                    
+                    // Transcript Information
+                    transcript: {
+                        uploaded: app.transcript ? 'Yes' : 'No',
+                        fileName: app.transcript?.originalName || 'N/A',
+                        fileSize: app.transcript?.size ? `${(app.transcript.size / 1024).toFixed(1)} KB` : 'N/A',
+                        serverFileName: app.transcript?.filename || 'N/A',
+                        downloadUrl: app.transcript ? `/uploads/${app.transcript.filename}` : 'N/A'
+                    },
+                    
+                    // Cover Letter Information
+                    coverLetter: {
+                        uploaded: app.coverLetter ? 'Yes' : 'No',
+                        fileName: app.coverLetter?.originalName || 'N/A',
+                        fileSize: app.coverLetter?.size ? `${(app.coverLetter.size / 1024).toFixed(1)} KB` : 'N/A',
+                        serverFileName: app.coverLetter?.filename || 'N/A',
+                        downloadUrl: app.coverLetter ? `/uploads/${app.coverLetter.filename}` : 'N/A'
+                    },
+                    
+                    // Application Questions
                     applicationQuestions: {
                         meetsBasicRequirements: app.formData?.basicRequirements || 'N/A',
                         workAuthorization: app.formData?.workAuthorized || 'N/A',
@@ -892,5 +930,6 @@
     </script>
 </body>
 </html>
+
 
 
